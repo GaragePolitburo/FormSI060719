@@ -20,6 +20,14 @@ The ERC721 functions are:
 name()
 totalSupply()
 symbol()
+balanceOf(address owner)
+ownerOf(uint256 tokenId)
+approve(address to, uint256 tokenId)
+setApprovalForAll(address to, bool approved)
+isApprovedForAll(address owner, address operator)
+transferFrom(address from, address to, uint256 tokenId)
+safeTransferFrom(address from, address to, uint256 tokenId)
+function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory _data)
 ```
 
 
