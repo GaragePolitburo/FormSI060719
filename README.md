@@ -11,7 +11,16 @@ Based also on CryptoPunks by Larva Labs: https://github.com/larvalabs/cryptopunk
 Text snippets in FormSI060719 are taken from Masha Gessen, Nisi Shawl, Margaret Thatcher, Fredric Jameson, Paul Preciado, Leni Zumas, Philip Roth, Omar El Akkad, Wayne La Pierre, David Graeber, Walt Whitman, George Orwell, Rudyard Kipling, and Donna Haraway.
 
 
-FormSI060719 is a solidity program on the ethereum mainnet at address %%%%%%%%%. It is a form with 13 question, and a user can answer any question(s) the individual wants. The questions and answers are state variables (stored on the blockchain), and behave as [ERC721 tokens](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md). In addition to the standard ERC721 functions, functions for bidding on tokens, and putting them up for sale, are also available.
+FormSI060719 is a solidity program on the ethereum mainnet at address %%%%%%%%%. It is a form with 13 question, and a user can answer any question(s) the individual wants. The questions and answers are state variables (stored on the blockchain), and behave as [ERC721 tokens](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md). 
+
+There three types of functions: standard ERC721 functions, and market functions (for bidding on tokens, or putting them up for sale) 
+
+The ERC721 functions are:
+```
+name()
+totalSupply()
+symbol()
+```
 
 
 Testing file
