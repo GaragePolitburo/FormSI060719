@@ -25,6 +25,12 @@ Provides text of one of the 13 form questions, identified by `questionId`, which
 
 Allows user to answer a question, identified by `questionId`. The string `answer` will be associated with this question, and stored on the blockchain. 
 
+```
+getIndexfromQA(uint256 questionId, uint256 textId)
+getQAfromIndex(uint256 tokenId)
+```
+Provides indices for question and answer text. Each has an ERC721 token index (`tokenId`), which starts at zero, and goes high enough to accommodate all questions and answers. Each also has a QA index pair (`questionId, textId`). The index `questionId` identifies the question and varies from 0 to 12. When the index `textId` is zero, the question itself is selected. When the index `textId` is greater than zero, it selects an answer associated with `questionId`. The function `getIndexfromQA(uint256 questionId, uint256 textId)` takes in a QA index pair, and returns the ERC721 token index. The function `getQAfromIndex(uint256 tokenId)` takes in the ERC721 token index, and returns a QA index pair. If any of the indices are out of bounds (using 14 for `questionId`, for example), the function reverts.
+
 
 The ERC721 functions are:
 ```
