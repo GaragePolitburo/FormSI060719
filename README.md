@@ -29,7 +29,7 @@ transferFrom(address from, address to, uint256 tokenId)
 safeTransferFrom(address from, address to, uint256 tokenId)
 function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory _data)
 ```
-
+These functions are implemented with [OpenZeppelin code](https://github.com/OpenZeppelin/openzeppelin-solidity/tree/master/contracts/token/ERC721). For more information see the [ERC721 standard](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md).
 
 Testing file
 
