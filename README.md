@@ -13,7 +13,14 @@ Text snippets in FormSI060719 are taken from Masha Gessen, Nisi Shawl, Margaret 
 
 FormSI060719 is a solidity program on the ethereum mainnet at address %%%%%%%%%. It is a form with 13 question, and a user can answer any question(s) the individual wants. The questions and answers are state variables (stored on the blockchain), and behave as [ERC721 tokens](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md). 
 
-There three types of functions: standard ERC721 functions, and market functions (for bidding on tokens, or putting them up for sale) 
+There three types of functions: standard ERC721 functions, form functions (for reading and answering form questions), and market functions (for bidding on tokens, or putting them up for sale) 
+
+The form functions are:
+`getFormQuestion(uint256 questionId)`
+Provides text of one of the 13 form questions, identified by `questionId`, which varies between 0 and 12 (NOT 1 to 13).
+`answerQuestion(uint256 questionId, string answer)`
+Allows user to answer question, identified by `questionId`. The string `answer` will be stored on the blockchain. Each answer is give both a token 
+
 
 The ERC721 functions are:
 ```
@@ -30,6 +37,10 @@ safeTransferFrom(address from, address to, uint256 tokenId)
 function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory _data)
 ```
 These functions are implemented with [OpenZeppelin code](https://github.com/OpenZeppelin/openzeppelin-solidity/tree/master/contracts/token/ERC721). For more information see the [ERC721 standard](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md).
+
+
+
+
 
 Testing file
 
