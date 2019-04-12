@@ -19,17 +19,38 @@ The form functions are:
 
 `getFormQuestion(uint256 questionId)`
 
-Provides text of one of the 13 form questions, identified by `questionId`, which varies between 0 and 12 (NOT 1 to 13).
+Returns text of one of the 13 form questions, identified by `questionId`, which varies between 0 and 12 (NOT 1 to 13).
 
-`answerQuestion(uint256 questionId, string answer)`
+ `answerQuestion(uint256 questionId, string answer)`
 
 Allows user to answer a question, identified by `questionId`. The string `answer` will be associated with this question, and stored on the blockchain. 
+
+`getNumberOfAnswers(uint256 questionId)`
+
+Returns number of answers that have been entered for question `questionId`.
+
+`getFormAnswers(uint256 questionId, uint256 answerId)`
+
+Returns text of an answer to a question. The question is identified by `questionId` (which goes from 0 to 12), and the answer for the question is identified by `answerId` (which goes from 1 to the number of answers for that particular question). If there are no answers to the question, this function throws.
 
 ```
 getIndexfromQA(uint256 questionId, uint256 textId)
 getQAfromIndex(uint256 tokenId)
 ```
 Provides indices for question and answer text. Each has an ERC721 token index (`tokenId`), which starts at zero, and goes high enough to accommodate all questions and answers. Each also has a QA index pair (`questionId, textId`). The index `questionId` identifies the question and varies from 0 to 12. When the index `textId` is zero, the question itself is selected. When the index `textId` is greater than zero, it selects an answer associated with `questionId`. The function `getIndexfromQA(uint256 questionId, uint256 textId)` takes in a QA index pair, and returns the ERC721 token index. The function `getQAfromIndex(uint256 tokenId)` takes in the ERC721 token index, and returns a QA index pair. If any of the indices are out of bounds (using 14 for `questionId`, for example), the function reverts.
+
+marketDeclareForSale(uint256 tokenId, uint256 minPriceInWei)
+marketDeclareForSaleToAddress(uint256 tokenId, uint256 
+            minPriceInWei, address to)
+marketWithdrawForSale(uint256 tokenId)
+marketBuyForSale(uint256 tokenId)
+marketDeclareBid(uint256 tokenId)
+marketWithdrawBid(uint256 tokenId)
+marketAcceptBid(uint256 tokenId, uint256 minPrice)
+marketWithdrawWei()
+marketPendingWithdrawals(address holder)
+marketForSaleInfoByIndex(uint256 tokenId)
+marketBidInfoByIndex(uint256 tokenId)
 
 
 The ERC721 functions are:
