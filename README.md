@@ -13,7 +13,7 @@ Text snippets in FormSI060719 are taken from Masha Gessen, Nisi Shawl, Margaret 
 
 FormSI060719 is a solidity program on the ethereum mainnet at address 0x6B9d46a223fFa343f8b14D855A8314B0EfF7fcb7. It is a form with 13 question, and a user can answer any question(s) the individual wants. The questions and answers are state variables (stored on the blockchain), and behave as [ERC721 tokens](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md). 
 
-There three types of functions: standard ERC721 functions, form functions (for reading and answering form questions), and market functions (for bidding on tokens, or putting them up for sale) 
+There three types of functions: form functions (for reading and answering form questions), market functions (for bidding on tokens, or putting them up for sale), and standard ERC721 functions.
 
 ## Form Functions
 
