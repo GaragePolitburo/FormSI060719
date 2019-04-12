@@ -15,7 +15,7 @@ FormSI060719 is a solidity program on the ethereum mainnet at address %%%%%%%%%.
 
 There three types of functions: standard ERC721 functions, form functions (for reading and answering form questions), and market functions (for bidding on tokens, or putting them up for sale) 
 
-##Form Functions
+## Form Functions
 
 `getFormQuestion(uint256 questionId)`
 
