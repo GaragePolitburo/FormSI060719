@@ -47,6 +47,8 @@ Provides indices for question and answer text. Each has an ERC721 token index (`
 
 `marketWithdrawForSale(uint256 tokenId)`
 
+`marketForSaleInfoByIndex(uint256 tokenId)`
+
 `marketBuyForSale(uint256 tokenId)`
 
 `marketDeclareBid(uint256 tokenId)`
@@ -55,13 +57,11 @@ Provides indices for question and answer text. Each has an ERC721 token index (`
 
 `marketAcceptBid(uint256 tokenId, uint256 minPrice)`
 
-`marketWithdrawWei()`
+`marketBidInfoByIndex(uint256 tokenId)`
 
 `marketPendingWithdrawals(address holder)`
 
-`marketForSaleInfoByIndex(uint256 tokenId)`
-
-`marketBidInfoByIndex(uint256 tokenId)`
+`marketWithdrawWei()`
 
 
 ## ERC721 Functions
