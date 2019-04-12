@@ -41,18 +41,27 @@ Provides indices for question and answer text. Each has an ERC721 token index (`
 
 ## Market Functions
 
-marketDeclareForSale(uint256 tokenId, uint256 minPriceInWei)
-marketDeclareForSaleToAddress(uint256 tokenId, uint256 
-            minPriceInWei, address to)
-marketWithdrawForSale(uint256 tokenId)
-marketBuyForSale(uint256 tokenId)
-marketDeclareBid(uint256 tokenId)
-marketWithdrawBid(uint256 tokenId)
-marketAcceptBid(uint256 tokenId, uint256 minPrice)
-marketWithdrawWei()
-marketPendingWithdrawals(address holder)
-marketForSaleInfoByIndex(uint256 tokenId)
-marketBidInfoByIndex(uint256 tokenId)
+`marketDeclareForSale(uint256 tokenId, uint256 minPriceInWei)`
+
+`marketDeclareForSaleToAddress(uint256 tokenId, uint256 minPriceInWei, address to)`
+
+`marketWithdrawForSale(uint256 tokenId)`
+
+`marketBuyForSale(uint256 tokenId)`
+
+`marketDeclareBid(uint256 tokenId)`
+
+`marketWithdrawBid(uint256 tokenId)`
+
+`marketAcceptBid(uint256 tokenId, uint256 minPrice)`
+
+`marketWithdrawWei()`
+
+`marketPendingWithdrawals(address holder)`
+
+`marketForSaleInfoByIndex(uint256 tokenId)`
+
+`marketBidInfoByIndex(uint256 tokenId)`
 
 
 ## ERC721 Functions
