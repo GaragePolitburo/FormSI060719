@@ -4,16 +4,17 @@
 
 Information and code relating to FormSI060719, which is part of the show "Garage Politburo" at Susan Inglett Gallery, NY from June 7, 2019 - July 26, 2019
 
-Based on code by OpenZeppelin: https://github.com/OpenZeppelin/openzeppelin-solidity/tree/master/contracts/token/ERC721. Code uses Jan 4 2019 Open Zepplin package 76abd1a41ec7d96ef76370f3eadfe097226896a2.
+FormSI060719 is a solidity program on the ethereum mainnet at address 0x6B9d46a223fFa343f8b14D855A8314B0EfF7fcb7. It is a form with 13 question, any of which can be answered by any user. The questions and answers are state variables (stored on the blockchain), and behave as [ERC721 tokens](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md). 
 
-Based also on CryptoPunks by Larva Labs: https://github.com/larvalabs/cryptopunks
+The program is based on code by OpenZeppelin: https://github.com/OpenZeppelin/openzeppelin-solidity/tree/master/contracts/token/ERC721. Code uses Jan 4 2019 Open Zepplin package 76abd1a41ec7d96ef76370f3eadfe097226896a2.
+
+The program is also based on CryptoPunks by Larva Labs: https://github.com/larvalabs/cryptopunks
 
 Text snippets in FormSI060719 are taken from Masha Gessen, Nisi Shawl, Margaret Thatcher, Fredric Jameson, Paul Preciado, Leni Zumas, Philip Roth, Omar El Akkad, Wayne La Pierre, David Graeber, Walt Whitman, George Orwell, Rudyard Kipling, and Donna Haraway.
 
+The program has been extensively tested with the help of [Truffle](https://github.com/trufflesuite/truffle). See the test folder for the testing script used.
 
-FormSI060719 is a solidity program on the ethereum mainnet at address 0x6B9d46a223fFa343f8b14D855A8314B0EfF7fcb7. It is a form with 13 question, which can be answered by any user. The questions and answers are state variables (stored on the blockchain), and behave as [ERC721 tokens](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md). The program has been extensively tested with the help of [Truffle](https://github.com/trufflesuite/truffle). See the test folder for the testing script used.
-
-There three types of functions: form functions (for reading and answering form questions), market functions (for bidding on tokens, or putting them up for sale), and standard ERC721 functions.
+There are three types of functions in FormSi060719: form functions (for reading and answering form questions), market functions (for bidding on tokens, or putting them up for sale), and standard ERC721 functions.
 
 ## Form Functions
 
