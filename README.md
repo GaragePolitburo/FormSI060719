@@ -41,15 +41,31 @@ Provides indices for question and answer text. Each has an ERC721 token index (`
 
 ## Market Functions
 
+There are two groups of functions here. The "For Sale" functions enable the token owner to put a token up for sale at a minimum price (`minPriceWei`), and enable anyone else to buy the token. Information about whether a token is up for sale, and if so what its price is, can be obtained from `marketForSaleInfoByIndex(uint256 tokenId)`. The "Bid" functions enable anyone to put a bid up for any token. The token owner may choose to accept the bid, resulting in an exchange of the token for the amount of ether bid. Information about whether or not there's a bid on a token, and if so what the bid amount is, can be obtained from `marketBidInfoByIndex(uint256 tokenId)`.
+
+All money amounts are in wei (1 wei = 10^18 ether)
+
+Only the token owner (and not other authorized users from the ERC721 section of the code) can put a token up for sale, or accept a bid.
+
+### For Sale Functions
+
 `marketDeclareForSale(uint256 tokenId, uint256 minPriceInWei)`
+
+Declare a token (identified by the ERC721 index `tokenId`) for sale, at a price `minPriceInWei`.
 
 `marketDeclareForSaleToAddress(uint256 tokenId, uint256 minPriceInWei, address to)`
 
+Declare a token (identified by the ERC721 index `tokenId`) for sale to a specific address `to`, at a price `minPriceInWei`. Only the address `to` can buy this token.
+
 `marketWithdrawForSale(uint256 tokenId)`
+
+Remove a "For Sale" declaration. Only the token owner can call this function.
 
 `marketForSaleInfoByIndex(uint256 tokenId)`
 
 `marketBuyForSale(uint256 tokenId)`
+
+### Bid functions
 
 `marketDeclareBid(uint256 tokenId)`
 
