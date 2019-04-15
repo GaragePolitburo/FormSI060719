@@ -67,7 +67,7 @@ Shows the "For Sale" status of a specific token (identified by the ERC721 index 
 
 `marketBuyForSale(uint256 tokenId)`
 
-Enables a user to buy a token (identified by the ERC721 index `tokenId`) that is up for sale. If `marketForSaleInfoByIndex(tokenId).onlySellto` returns the zero address, then any address can buy the token that is for sale. If `marketForSaleInfoByIndex(tokenId).onlySellto` returns a non-zero address, then only that address can buy the token that is for sale. Must send at least the sale price  (`marketForSaleInfoByIndex(tokenId).minValue`) to complete the transaction.
+Enables a user to buy a token (identified by the ERC721 index `tokenId`) that is up for sale. If `marketForSaleInfoByIndex(tokenId).onlySellto` returns the zero address, then any user can buy the token that is for sale. If `marketForSaleInfoByIndex(tokenId).onlySellto` returns a non-zero address, then only that user can buy the token that is for sale. Must send an amount of wei at least equal to the sale price  (`marketForSaleInfoByIndex(tokenId).minValue`) with the function call to complete the transaction.
 
 #### Bid functions
 
