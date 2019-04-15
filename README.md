@@ -93,12 +93,12 @@ Shows the amount of ether (in wei) avaiable for the address `holder` to withdraw
 
 `marketWithdrawWei()`
 
-Enables a user to withdraw ether after a successful sale, after accepting a bid, after withdrawing a bid, or after another address outbids. When a user (identified by `address`) calls `marketWithdrawWei()`, the amount `marketPendingWithdrawals(address)` is transferred to the user's address.
+Enables a user to withdraw ether after a successful sale, after accepting a bid, after withdrawing a bid, or after another address outbids. When a user (identified by `address`) calls `marketWithdrawWei()`, the amount `marketPendingWithdrawals(address)` is transferred to the user address.
 
 
 ## ERC721 Functions
 
-The standard ERC721 functions are fully implelemented with [OpenZeppelin code](https://github.com/OpenZeppelin/openzeppelin-solidity/tree/master/contracts/token/ERC721). The Open Zeppelin code is untouched, except for changes to the internal function `_transferFrom(address from, address to, uint256 tokenId)`, to ensure that it correctly resets any outstanding bids or for sale declarations if a token is transferred. 
+The standard ERC721 functions are fully implelemented with [OpenZeppelin code](https://github.com/OpenZeppelin/openzeppelin-solidity/tree/master/contracts/token/ERC721). The Open Zeppelin code is untouched, except for changes to the function `transferFrom(address from, address to, uint256 tokenId)`, which ensures that, if necessary, the function correctly resets any outstanding bids or for sale declarations when a token is transferred. 
 
 ```
 name()
