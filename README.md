@@ -47,7 +47,7 @@ All money amounts are in wei (1 wei = 1e18 ether)
 
 Only the token owner (and not other authorized users from the ERC721 section of the code) can put a token up for sale, or accept a bid.
 
-### For Sale Functions
+#### For Sale Functions
 
 `marketDeclareForSale(uint256 tokenId, uint256 minPriceInWei)`
 
@@ -69,7 +69,7 @@ Shows the "For Sale" status of a specific token (identified by the ERC721 index 
 
 Enables a user to buy a token (identified by the ERC721 index `tokenId`) that is up for sale. If `marketForSaleInfoByIndex(tokenId).onlySellto` returns the zero address, then any address can buy the token that is for sale. If `marketForSaleInfoByIndex(tokenId).onlySellto` returns a non-zero address, then only that address can buy the token that is for sale. Must send at least the sale price  (`marketForSaleInfoByIndex(tokenId).minValue`) to complete the transaction.
 
-### Bid functions
+#### Bid functions
 
 `marketDeclareBid(uint256 tokenId)`
 
