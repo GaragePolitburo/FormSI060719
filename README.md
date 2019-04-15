@@ -97,6 +97,9 @@ Enables a user to withdraw ether after a successful sale, after accepting a bid,
 
 
 ## ERC721 Functions
+
+The standard ERC721 functions are fully implelemented with [OpenZeppelin code](https://github.com/OpenZeppelin/openzeppelin-solidity/tree/master/contracts/token/ERC721). The Open Zeppelin code is untouched, except for changes to the internal function `_transferFrom(address from, address to, uint256 tokenId)`, to ensure that it correctly resets any outstanding bids or for sale declarations if a token is transferred. 
+
 ```
 name()
 totalSupply()
@@ -110,6 +113,6 @@ transferFrom(address from, address to, uint256 tokenId)
 safeTransferFrom(address from, address to, uint256 tokenId)
 safeTransferFrom(address from, address to, uint256 tokenId, bytes memory _data)
 ```
-These functions are implemented with [OpenZeppelin code](https://github.com/OpenZeppelin/openzeppelin-solidity/tree/master/contracts/token/ERC721). See also the [ERC721 standard](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md).
+
 
 
