@@ -25,10 +25,6 @@ Returns text of one of the 13 form questions, identified by `questionId`, which 
 > `FormSI060719 :: freeAssociationAndResponse :: Section 0-2b :: When we ask ourselves "How are we?
 " :: we really want to know ::` 
 
-Calling `getFormQuestion(1)` returns 
-
-> `FormSI060719 :: freeAssociationAndResponse :: Section 0-2b :: How are we to ensure equitable merit-based access? :: Tried to cut down :: used more than intended :: `
-
 Calling `getFormQuestions(7)` returns
 
 > `FormSI060719 :: freeAssociationAndResponse :: Section2-TINA :: The Secret Joys of Bureaucracy :: Ministry of Splendid Suns :: Ministry of Plenty :: Crime Bureau :: Aerial Board of Control :: Office of Tabletop Assumption :: Central Committee :: Division of Complicity :: Ministry of Information :: `
