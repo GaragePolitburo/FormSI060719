@@ -22,10 +22,7 @@ There are three types of functions in FormSi060719: form functions (for reading 
 
 Returns text of one of the 13 form questions, identified by `questionId`, which varies between 0 and 12. For example, going to https://etherscan.io/address/0x6b9d46a223ffa343f8b14d855a8314b0eff7fcb7#readContract, and calling `getFormQuestion(0)` returns
 
-`FormSI060719 :: freeAssociationAndResponse :: Section 0-2b :: When we ask ourselves "How are we?
-
-
-
+> `FormSI060719 :: freeAssociationAndResponse :: Section 0-2b :: When we ask ourselves "How are we?
 " :: we really want to know ::`. 
 
 Calling `getFormQuestion(1)` returns 
