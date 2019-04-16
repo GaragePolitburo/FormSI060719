@@ -4,27 +4,27 @@
 
 Information and code relating to FormSI060719, which is part of the show "Garage Politburo" at Susan Inglett Gallery, NY from June 7, 2019 - July 26, 2019
 
-FormSI060719 is a solidity program on the ethereum mainnet at address 0x6B9d46a223fFa343f8b14D855A8314B0EfF7fcb7. It is a form with 13 question, any of which can be answered by any user. The questions and answers are state variables (stored on the blockchain), and behave as [ERC721 tokens](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md). 
+FormSI060719 is a solidity program on the ethereum mainnet at address 0x6B9d46a223fFa343f8b14D855A8314B0EfF7fcb7. It is a form with 13 question, any of which can be answered by any user. The questions and answers that are submitted are state variables (stored on the blockchain), and behave as non-fungible tokens (see [the ERC721 standard](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md) for more information). The code is published in this repository, and at etherscan.io
 
-The program is based on code by OpenZeppelin: https://github.com/OpenZeppelin/openzeppelin-solidity/tree/master/contracts/token/ERC721. Code uses Jan 4 2019 Open Zepplin package 76abd1a41ec7d96ef76370f3eadfe097226896a2.
+The ERC721 portion of the program is based on code by OpenZeppelin: https://github.com/OpenZeppelin/openzeppelin-solidity/tree/master/contracts/token/ERC721. It uses the Jan 4 2019 Open Zepplin package 76abd1a41ec7d96ef76370f3eadfe097226896a2.
 
-The program is also based on CryptoPunks by Larva Labs: https://github.com/larvalabs/cryptopunks
+The market portion of the program is based on CryptoPunks by Larva Labs: https://github.com/larvalabs/cryptopunks
 
-Text snippets in FormSI060719 are taken from Masha Gessen, Nisi Shawl, Margaret Thatcher, Fredric Jameson, Paul Preciado, Leni Zumas, Philip Roth, Omar El Akkad, Wayne La Pierre, David Graeber, Walt Whitman, George Orwell, Rudyard Kipling, and Donna Haraway.
+Text snippets in FormSI060719 are taken from Masha Gessen, Nisi Shawl, Margaret Thatcher, Fredric Jameson, Leni Zumas, Philip Roth, Omar El Akkad, Wayne La Pierre, David Graeber, Walt Whitman, George Orwell, Rudyard Kipling, and Donna Haraway.
 
 The program has been extensively tested with the help of [Truffle](https://github.com/trufflesuite/truffle). See the test folder for the testing script used.
 
-There are three types of functions in FormSi060719: form functions (for reading and answering form questions), market functions (for bidding on tokens, or putting them up for sale), and standard ERC721 functions.
+There are three types of functions in FormSi060719: form functions (for reading and answering form questions), market functions (for bidding on question and answers, or putting them up for sale), and standard ERC721 functions.
 
 ## Form Functions
 
 `getFormQuestion(uint256 questionId)`
 
-Returns text of one of the 13 form questions, identified by `questionId`, which varies between 0 and 12 (NOT 1 to 13).
+Returns text of one of the 13 form questions, identified by `questionId`, which varies between 0 and 12. For example, going to https://etherscan.io/address/0x6b9d46a223ffa343f8b14d855a8314b0eff7fcb7#readContract, and calling `getFormQuestion(0)` returns `FormSI060719 :: freeAssociationAndResponse :: Section 0-2b :: When we ask ourselves \"How are we?\" :: we really want to know ::`. Calling `getFormQuestion(1)` returns `FormSI060719 :: freeAssociationAndResponse :: Section 0-2b :: How are we to ensure equitable merit-based access? :: Tried to cut down :: used more than intended :: `, and so on....
 
  `answerQuestion(uint256 questionId, string answer)`
 
-Allows user to answer a question, identified by `questionId`. The string `answer` will be associated with this question, and stored on the blockchain. Like all the questions, each answer behaves as an ERC721 non-fungible token.
+Allows user to answer a question, identified by `questionId`. The string `answer` will be associated with this question, and stored on the blockchain. Like all the questions, each entered answer behaves as an ERC721 non-fungible token.
 
 `getNumberOfAnswers(uint256 questionId)`
 
@@ -38,13 +38,17 @@ Returns text of an answer to a question. The question is identified by `question
 getIndexfromQA(uint256 questionId, uint256 textId)
 getQAfromIndex(uint256 tokenId)
 ```
-Provides indices for question and answer text. Each has an ERC721 token index (`tokenId`), which starts at zero, and goes high enough to accommodate all questions and answers. Each also has a QA index pair (`questionId, textId`). The index `questionId` identifies the question and varies from 0 to 12. When the index `textId` is zero, the question itself is selected. When the index `textId` is greater than zero, it selects an answer associated with `questionId`. The function `getIndexfromQA(uint256 questionId, uint256 textId)` takes in a QA index pair, and returns the ERC721 token index. The function `getQAfromIndex(uint256 tokenId)` takes in the ERC721 token index, and returns a QA index pair. If any of the indices are out of bounds (using 14 for `questionId`, for example), the function reverts.
+Provides conversion between indices. The section of FormSI060719 that deals with questions and answers uses a QA index pair (`questionId, textId`) to refer to question and answer text. However, the ERC721 section of the program (see below) refers to a question or answer with a single token index (`tokenId`). The token indices 0 through 12 contain the questions, the first entered answer will receive token index 13, the second question entered will receive token index 14, etc...  The function `getIndexfromQA(uint256 questionId, uint256 textId)` takes in a QA index pair, and returns the ERC721 token index. The function `getQAfromIndex(uint256 tokenId)` takes in the ERC721 token index, and returns a QA index pair. If any of the indices are out of bounds (using 14 for `questionId`, for example), the function throws. 
+
+A detail: in the QA index pair (`questionId, textId`), the index `questionId` identifies the question and varies from 0 to 12. When the index `textId` is zero, the question itself is selected. When the index `textId` is greater than zero, it selects an answer associated with `questionId`. 
 
 ## Market Functions
 
-There are two groups of functions here. The "For Sale" functions enable the token owner to put a token up for sale at a minimum price (`minPriceWei`), and enable anyone else to buy the token. Information about whether a token is up for sale, and if so what its price is, can be obtained from `marketForSaleInfoByIndex(uint256 tokenId)`. The "Bid" functions enable anyone to put a bid up for any token. The token owner may choose to accept the bid, resulting in an exchange of the token for the amount of ether bid. Information about whether or not there's a bid on a token, and if so what the bid amount is, can be obtained from `marketBidInfoByIndex(uint256 tokenId)`.
+There are three groups of functions here. The "For Sale" functions enable the token owner to put a token (really a question or answer) up for sale at a price (`minPriceWei`). If someone chooses to buy the token, the token and ether change hands. Information about whether a token is up for sale, and if so what its price is, can be obtained from `marketForSaleInfoByIndex(uint256 tokenId)`. 
 
-All money amounts are in wei (1 wei = 1e18 ether)
+The "Bid" functions enable anyone to put a bid up for any token. The token owner may choose to accept the bid, resulting in an exchange of the token for the amount of ether bid. Information about whether or not there's a bid on a token, and if so what the bid amount is, can be obtained from `marketBidInfoByIndex(uint256 tokenId)`.
+
+The "Withdraw" functions handle the withdraw of ether after a transaction. All money amounts are in wei (1 wei = 1e18 ether)
 
 Only the token owner (and not other authorized users from the ERC721 section of the code) can put a token up for sale, or accept a bid.
 
@@ -52,11 +56,11 @@ Only the token owner (and not other authorized users from the ERC721 section of 
 
 `marketDeclareForSale(uint256 tokenId, uint256 minPriceInWei)`
 
-Declare a token (identified by the ERC721 index `tokenId`) for sale, at a price `minPriceInWei`.
+Declare a token (identified by the ERC721 index `tokenId`) for sale, at a price `minPriceInWei`. Only the token owner can call this function.
 
 `marketDeclareForSaleToAddress(uint256 tokenId, uint256 minPriceInWei, address to)`
 
-Declare a token (identified by the ERC721 index `tokenId`) for sale to a specific address `to`, at a price `minPriceInWei`. Only the address `to` can buy this token.
+Declare a token (identified by the ERC721 index `tokenId`) for sale to a specific address `to`, at a price `minPriceInWei`. Only the address `to` can buy this token. Only the token owner can call this function.
 
 `marketWithdrawForSale(uint256 tokenId)`
 
@@ -64,29 +68,31 @@ Remove a "For Sale" declaration. Only the token owner can call this function.
 
 `marketForSaleInfoByIndex(uint256 tokenId)`
 
-Shows the "For Sale" status of a specific token (identified by the ERC721 index `tokenId`). The structure `marketForSaleInfoByIndex(tokenId)` contains a boolean indicating whether or not the token is for sale (`isForSale`), the ERC721 index of the token (`tokenId`), the current owner and seller of the token (`seller`), the pirce of the token (`minValue`) in Wei, and the address of the recipient (`onlySellTo`). If the recipient address is the zero address, then anyone can buy the token. Note that this function is a getter that directly access the structure, so it does not throw if the token `tokenId` does not exist, unlike all the other "For Sale" functions.
+Shows the "For Sale" status of a specific token (identified by the ERC721 index `tokenId`). The structure `marketForSaleInfoByIndex(tokenId)` contains a boolean indicating whether or not the token is for sale (`isForSale`), the ERC721 index of the token (`tokenId`), the current owner and seller of the token (`seller`), the price of the token (`minValue`) in Wei, and the address of the recipient (`onlySellTo`). If the recipient address is the zero address, then anyone can buy the token. Note that this function is a getter that directly accesses the structure, so it does not throw if the token `tokenId` does not exist, unlike the other "For Sale" functions.
 
 `marketBuyForSale(uint256 tokenId)`
 
-Enables a user to buy a token (identified by the ERC721 index `tokenId`) that is up for sale. If `marketForSaleInfoByIndex(tokenId).onlySellto` returns the zero address, then any user can buy the token that is for sale. If `marketForSaleInfoByIndex(tokenId).onlySellto` returns a non-zero address, then only that user can buy the token that is for sale. Must send an amount of wei at least equal to the sale price  (`marketForSaleInfoByIndex(tokenId).minValue`) with the function call to complete the transaction.
+Enables a user to buy a token (identified by the ERC721 index `tokenId`) that is up for sale. If `marketForSaleInfoByIndex(tokenId).onlySellto` returns the zero address, then any user can buy the token that is for sale. If `marketForSaleInfoByIndex(tokenId).onlySellto` returns a non-zero address, then only that user can buy the token that is for sale. The purchaser must send an amount of wei at least equal to the sale price  (`marketForSaleInfoByIndex(tokenId).minValue`) with the function call to complete the transaction.
 
-#### Bid functions
+#### Bid Functions
 
 `marketDeclareBid(uint256 tokenId)`
 
-Enables a user to decalre a bid for a token (identified by the ERC721 index `tokenId`). The user must send the amount of the bid with the function call. If there is already a bid on the token (check `marketBidInfoByIndex(uint256 tokenId)`), the bid must be larger than `marketBidInfoByIndex(tokenId).value`, otherwise it throws. The previous bid is overwritten, and the amount of the previous bid is made available for withdraw through `marketWithdrawWei()`.
+Enables a user to decalre a bid for a token (identified by the ERC721 index `tokenId`). The user must send the amount of the bid with the function call. If there is already a bid on the token (check `marketBidInfoByIndex(uint256 tokenId)`), the bid must be larger than `marketBidInfoByIndex(tokenId).value`, otherwise `marketDeclareBid(tokenId)` throws. Assuming it is larger, the previous bid is overwritten, and the amount of the previous bid is made available for withdraw through `marketWithdrawWei()`.
 
 `marketWithdrawBid(uint256 tokenId)`
 
-Enables a user to withdraw a bid on a token (identified by the ERC721 index `tokenId`) already made. Only the bidder `marketBidInfoByIndex(tokenId).bidder` can call this function. The bid is NOT automatically refunded: the user must call `marketWithdrawWei()`.
+Enables a user to remove a bid on a token (identified by the ERC721 index `tokenId`) already made. Only the bidder `marketBidInfoByIndex(tokenId).bidder` can call this function. The bid is NOT automatically refunded: the user must call `marketWithdrawWei()`.
 
 `marketAcceptBid(uint256 tokenId, uint256 minPrice)`
 
-Enables a token owner to accept a bid, and transfer the token (identified by the ERC721 index `tokenId`) to the bidder. Only the token owner can call this function. The parameter `minPrice` must be smaller than or equal to `marketBidInfoByIndex(tokenId).value`. After calling this functin, the bid is NOT automatically transferred to the former owner: the former owner must call `marketWithdrawWei()`.
+Enables a token owner to accept a bid, and transfer the token (identified by the ERC721 index `tokenId`) to the bidder in exchange for the ether bid. Only the token owner can call this function. The parameter `minPrice` must be smaller than or equal to `marketBidInfoByIndex(tokenId).value`. After calling this functin, the bid is NOT automatically transferred to the former owner: the former owner must call `marketWithdrawWei()`.
 
 `marketBidInfoByIndex(uint256 tokenId)`
 
-Shows the "Bid" status of a specific token (identified by the ERC721 index `tokenId`). The structure `marketBidInfoByIndex(tokenId)` contains a boolean indicating whether or not a bid for the token exists (`hasBid`), the ERC721 index of the token (`tokenId`), the current bidder for the token (`bidder`), and the bid (`value`) in Wei. Note that this function is a getter that directly access the structure, so it does not throw if the token `tokenId` does not exist, unlike all the other "Bid" functions.
+Shows the "Bid" status of a specific token (identified by the ERC721 index `tokenId`). The structure `marketBidInfoByIndex(tokenId)` contains a boolean indicating whether or not a bid for the token exists (`hasBid`), the ERC721 index of the token (`tokenId`), the current bidder for the token (`bidder`), and the bid in wei (`value`). Note that this function is a getter that directly access the structure, so it does not throw if the token `tokenId` does not exist, unlike the other "Bid" functions.
+
+#### Withdraw Functions
 
 `marketPendingWithdrawals(address holder)`
 
@@ -99,7 +105,7 @@ Enables a user to withdraw ether after a successful sale, after accepting a bid,
 
 ## ERC721 Functions
 
-The standard ERC721 functions are fully implelemented with [OpenZeppelin code](https://github.com/OpenZeppelin/openzeppelin-solidity/tree/master/contracts/token/ERC721). The Open Zeppelin code is untouched, except for changes to the function `transferFrom(address from, address to, uint256 tokenId)`, which ensures that, if necessary, the function correctly resets any outstanding bids or for sale declarations when a token is transferred. 
+The standard ERC721 functions are implelemented with [OpenZeppelin code](https://github.com/OpenZeppelin/openzeppelin-solidity/tree/master/contracts/token/ERC721). The Open Zeppelin code is untouched, except for changes to the function `transferFrom(address from, address to, uint256 tokenId)`, which ensures that, if necessary, the function correctly resets any outstanding bids or for sale declarations when a token is transferred. 
 
 ```
 name()
