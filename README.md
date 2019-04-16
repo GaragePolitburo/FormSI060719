@@ -18,7 +18,7 @@ There are three types of functions in FormSi060719: form functions (for reading 
 
 ## Form Functions
 
-`getFormQuestion(uint256 questionId)`
+- `getFormQuestion(uint256 questionId)`
 
 Returns text of one of the 13 form questions, identified by `questionId`, which varies between 0 and 12. For example, going to https://etherscan.io/address/0x6b9d46a223ffa343f8b14d855a8314b0eff7fcb7#readContract, and calling `getFormQuestion(0)` returns
 
@@ -31,22 +31,21 @@ Calling `getFormQuestions(7)` returns
 
 and so on....
 
- `answerQuestion(uint256 questionId, string answer)`
+- `answerQuestion(uint256 questionId, string answer)`
 
 Allows user to answer a question, identified by `questionId`. The string `answer` will be associated with this question, and stored on the blockchain. Like all the questions, each entered answer behaves as an ERC721 non-fungible token.
 
-`getNumberOfAnswers(uint256 questionId)`
+- `getNumberOfAnswers(uint256 questionId)`
 
 Returns number of answers that have been entered for question `questionId`.
 
-`getFormAnswers(uint256 questionId, uint256 answerId)`
+- `getFormAnswers(uint256 questionId, uint256 answerId)`
 
 Returns text of an answer to a question. The question is identified by `questionId` (which goes from 0 to 12), and the answer for the question is identified by `answerId` (which goes from 1 to the number of answers for that particular question). If there are no answers to the question, this function throws.
 
-```
-getIndexfromQA(uint256 questionId, uint256 textId)
-getQAfromIndex(uint256 tokenId)
-```
+- `getIndexfromQA(uint256 questionId, uint256 textId)`
+- `getQAfromIndex(uint256 tokenId)`
+
 Provides conversion between indices. The section of FormSI060719 that deals with questions and answers uses a QA index pair (`questionId, textId`) to refer to question and answer text. However, the ERC721 section of the program (see below) refers to a question or answer with a single token index (`tokenId`). The token indices 0 through 12 contain the questions, the first entered answer will receive token index 13, the second question entered will receive token index 14, etc...  The function `getIndexfromQA(uint256 questionId, uint256 textId)` takes in a QA index pair, and returns the ERC721 token index. The function `getQAfromIndex(uint256 tokenId)` takes in the ERC721 token index, and returns a QA index pair. If any of the indices are out of bounds (using 14 for `questionId`, for example), the function throws. 
 
 A detail: in the QA index pair (`questionId, textId`), the index `questionId` identifies the question and varies from 0 to 12. When the index `textId` is zero, the question itself is selected. When the index `textId` is greater than zero, it selects an answer associated with `questionId`. 
