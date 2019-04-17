@@ -1,17 +1,17 @@
 
 
-# FormSI060719
+# FormSI060719 Documentation
 
 ????????LEAVE OUT FUNCTIONS?
 ?????? SPELL CHECK
 
-Information and code relating to FormSI060719, which is part of the show "Garage Politburo" at Susan Inglett Gallery, NY from June 7, 2019 - July 26, 2019
+This documents explains how to use FormSI060719, which is part of the show "Garage Politburo" at Susan Inglett Gallery, NY from June 7, 2019 - July 26, 2019. As part of my first attempt at creating a tabletop bureaucracy, the instructions below are somewhat dry and unenlightening, and the interface for using the program is rather stripped down. Please submit any suggestions or complaints through the comment section.
 
 FormSI060719 is a solidity program on the ethereum mainnet at address 0x6B9d46a223fFa343f8b14D855A8314B0EfF7fcb7. It is a form with 13 question, any of which can be answered by any user. The questions and answers that are submitted are state variables (stored on the blockchain), and behave as non-fungible tokens (see [the ERC721 standard](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md) for more information). The code is published in this repository, and at etherscan.io
 
-The ERC721 portion of the program is based on code by OpenZeppelin: https://github.com/OpenZeppelin/openzeppelin-solidity/tree/master/contracts/token/ERC721. It uses the Jan 4 2019 Open Zepplin package 76abd1a41ec7d96ef76370f3eadfe097226896a2.
+The ERC721 portion of the program is based on code by [OpenZeppelin](https://github.com/OpenZeppelin/openzeppelin-solidity/tree/master/contracts/token/ERC721). 
 
-The market portion of the program is based on CryptoPunks by Larva Labs: https://github.com/larvalabs/cryptopunks
+The market portion of the program is based on [CryptoPunks](https://github.com/larvalabs/cryptopunks) by Larva Labs. 
 
 Text snippets in FormSI060719 are taken from Masha Gessen, Nisi Shawl, Margaret Thatcher, Fredric Jameson, Leni Zumas, Philip Roth, Omar El Akkad, Wayne La Pierre, David Graeber, Walt Whitman, George Orwell, Rudyard Kipling, and Donna Haraway.
 
@@ -59,7 +59,7 @@ There are three groups of functions here. The "For Sale" functions enable the to
 
 The "Bid" functions enable anyone to put a bid up for any token. The token owner may choose to accept the bid, resulting in an exchange of the token for the amount of ether bid. Information about whether or not there's a bid on a token, and if so what the bid amount is, can be obtained from `marketBidInfoByIndex(uint256 tokenId)`.
 
-The "Withdraw" functions handle the withdraw of ether after a transaction. All money amounts are in wei (1 wei = 1e18 ether)
+The "Withdraw" functions handle the withdrawal of ether after a transaction. All money amounts are in wei (1 wei = 1e18 ether)
 
 Only the token owner (and not other authorized users from the ERC721 section of the code) can put a token up for sale, or accept a bid.
 
@@ -89,7 +89,7 @@ Enables a user to buy a token (identified by the ERC721 index `tokenId`) that is
 
 - `marketDeclareBid(uint256 tokenId)`
 
-Enables a user to decalre a bid for a token (identified by the ERC721 index `tokenId`). The user must send the amount of the bid with the function call. If there is already a bid on the token (check `marketBidInfoByIndex(uint256 tokenId)`), the bid must be larger than `marketBidInfoByIndex(tokenId).value`, otherwise `marketDeclareBid(tokenId)` throws. Assuming it is larger, the previous bid is overwritten, and the amount of the previous bid is made available for withdraw through `marketWithdrawWei()`.
+Enables a user to declare a bid for a token (identified by the ERC721 index `tokenId`). The user must send the amount of the bid with the function call. If there is already a bid on the token (check `marketBidInfoByIndex(uint256 tokenId)`), the bid must be larger than `marketBidInfoByIndex(tokenId).value`, otherwise `marketDeclareBid(tokenId)` throws. Assuming it is larger, the previous bid is overwritten, and the amount of the previous bid is made available for withdraw through `marketWithdrawWei()`.
 
 - `marketWithdrawBid(uint256 tokenId)`
 
@@ -97,7 +97,7 @@ Enables a user to remove a bid on a token (identified by the ERC721 index `token
 
 - `marketAcceptBid(uint256 tokenId, uint256 minPrice)`
 
-Enables a token owner to accept a bid, and transfer the token (identified by the ERC721 index `tokenId`) to the bidder in exchange for the ether bid. Only the token owner can call this function. The parameter `minPrice` must be smaller than or equal to `marketBidInfoByIndex(tokenId).value`. After calling this functin, the bid is NOT automatically transferred to the former owner: the former owner must call `marketWithdrawWei()`.
+Enables a token owner to accept a bid, and transfer the token (identified by the ERC721 index `tokenId`) to the bidder in exchange for the ether bid. Only the token owner can call this function. The parameter `minPrice` must be smaller than or equal to `marketBidInfoByIndex(tokenId).value`. After calling this function, the bid is NOT automatically transferred to the former owner: the former owner must call `marketWithdrawWei()`.
 
 - `marketBidInfoByIndex(uint256 tokenId)`
 
@@ -116,7 +116,7 @@ Enables a user to withdraw ether after a successful sale, after accepting a bid,
 
 ## ERC721 Functions
 
-The standard ERC721 functions are implelemented with [OpenZeppelin code](https://github.com/OpenZeppelin/openzeppelin-solidity/tree/master/contracts/token/ERC721). The Open Zeppelin code is untouched, except for changes to the function `transferFrom(address from, address to, uint256 tokenId)`, which ensures that, if necessary, the function correctly resets any outstanding bids or for sale declarations when a token is transferred. 
+The standard ERC721 functions are implemented with [OpenZeppelin code](https://github.com/OpenZeppelin/openzeppelin-solidity/tree/master/contracts/token/ERC721) (specifically, FormSI060719 uses the Jan 4 2019 Open Zeppelin package 76abd1a41ec7d96ef76370f3eadfe097226896a2). The Open Zeppelin code is untouched, except for changes to the function `transferFrom(address from, address to, uint256 tokenId)`, which ensures that, if necessary, the function correctly resets any outstanding bids or for sale declarations when a token is transferred. 
 
 ```
 name()
