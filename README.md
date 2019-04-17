@@ -2,7 +2,7 @@
 
 # FormSI060719 Documentation
 
-This documents explains how to use FormSI060719, which is part of the show "Garage Politburo" at Susan Inglett Gallery, NY from June 7, 2019 - July 26, 2019. As part of my first attempt at creating a tabletop bureaucracy, the instructions below are rather dry and tedious, and the interface for using the program is somewhat stripped down and confusing. Please submit any suggestions or complaints by clicking on the "Issues" tab above.
+This document explains how to use FormSI060719, which is part of the show "Garage Politburo" at Susan Inglett Gallery, NY from June 7, 2019 - July 26, 2019. As part of my first attempt at creating a tabletop bureaucracy, the instructions below are rather dry and tedious, and the interface for using the program is somewhat stripped down and confusing. Please submit any suggestions or complaints by clicking on the "Issues" tab above.
 
 FormSI060719 is a solidity program on the ethereum mainnet at address 0x6B9d46a223fFa343f8b14D855A8314B0EfF7fcb7. It is a form with 13 question, any of which can be answered by any user. The questions and answers that are submitted are state variables (stored on the blockchain), and behave as non-fungible tokens (see [the ERC721 standard](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md) for more information). The code is published in this repository, and at [etherscan](https://etherscan.io/address/0x6b9d46a223ffa343f8b14d855a8314b0eff7fcb7#code).
 
