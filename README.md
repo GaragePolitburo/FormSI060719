@@ -119,6 +119,7 @@ The standard ERC721 functions are implemented with [OpenZeppelin code](https://g
 name()
 totalSupply()
 symbol()
+supportsInterface(bytes4 interfaceId)
 balanceOf(address owner)
 ownerOf(uint256 tokenId)
 approve(address to, uint256 tokenId)
