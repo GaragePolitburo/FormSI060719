@@ -46,9 +46,13 @@ Returns text of an answer to a question. The question is identified by `question
 - `getIndexfromQA(uint256 questionId, uint256 textId)`
 - `getQAfromIndex(uint256 tokenId)`
 
-Provides conversion between indices. The section of FormSI060719 that deals with questions and answers uses a QA pair (`questionId, textId`) to refer to question and answer text. However, the ERC721 section of the program (see below) refers to a question or answer with a single token index (`tokenId`). The token indices 0 through 12 contain the questions, the first entered answer will receive token index 13, the second question entered will receive token index 14, etc...  The function `getIndexfromQA(uint256 questionId, uint256 textId)` takes in a QA pair, and returns the ERC721 token index. The function `getQAfromIndex(uint256 tokenId)` takes in the ERC721 token index, and returns a QA pair. If any of the indices are out of bounds (using 14 for `questionId`, for example), the function throws. 
+Provides conversion between the two types of indices the program uses. 
 
-Note: in the QA pair (`questionId, textId`), the index `questionId` identifies the question and varies from 0 to 12. When the index `textId` is zero, the question itself is selected. When the index `textId` is greater than zero, it selects an answer associated with `questionId`. 
+The section of FormSI060719 that deals with with the form refers to question and answer text with a pair of numbers, which will be referred to as a QA pair (`questionId, textId`). The index `questionId` identifies the question and varies from 0 to 12. When the index `textId` is zero, the question itself is selected. When the index `textId` is greater than zero, it selects an answer associated with `questionId`. 
+
+However, the ERC721 section of the program (see below) refers to a question or answer with a single token index (`tokenId`). The token indices 0 through 12 contain the questions, the first entered answer will receive token index 13, the second question entered will receive token index 14, etc.  
+
+The function `getIndexfromQA(uint256 questionId, uint256 textId)` takes in a QA pair, and returns the ERC721 token index. The function `getQAfromIndex(uint256 tokenId)` takes in the ERC721 token index, and returns a QA pair. If any of the indices are out of bounds (using 14 for `questionId`, for example), the function throws. 
 
 ## Market Functions
 
