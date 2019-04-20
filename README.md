@@ -2,9 +2,9 @@
 
 # FormSI060719 Documentation
 
-This document explains how to use FormSI060719, which is part of the show "Garage Politburo" at Susan Inglett Gallery, NY from June 7, 2019 - July 26, 2019. As part of my first attempt at creating a tabletop bureaucracy, the instructions below are rather dry and tedious, and the interface for using the program is somewhat stripped down and confusing. Please submit any suggestions or complaints by clicking on the "Issues" tab above.
+This document explains how to use FormSI060719, which is part of the show "Garage Politburo" at Susan Inglett Gallery in New York, which is open from June 7, 2019 - July 26, 2019. Let's be honest folks: FormSI067019 is part of a tabletop bureaucracy, so for those not familiar with Ethereum, the instructions below will be at least as confusng as anything the IRS puts out. And the interface for using the program [here](https://etherscan.io/address/0x6b9d46a223ffa343f8b14d855a8314b0eff7fcb7#readContract) and [here](https://etherscan.io/address/0x6b9d46a223ffa343f8b14d855a8314b0eff7fcb7#writeContract) is not user friendly. Please submit any suggestions or complaints by clicking on the "Issues" tab above.
 
-FormSI060719 is a solidity program on the ethereum mainnet at address 0x6B9d46a223fFa343f8b14D855A8314B0EfF7fcb7. It is a form with 13 question, any of which can be answered by any user. The questions and answers that are submitted are state variables (stored on the blockchain), and behave as non-fungible tokens (see [the ERC721 standard](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md) for more information). The code is published in this repository, and at [etherscan](https://etherscan.io/address/0x6b9d46a223ffa343f8b14d855a8314b0eff7fcb7#code).
+FormSI060719 is a solidity program on the ethereum mainnet at address 0x6B9d46a223fFa343f8b14D855A8314B0EfF7fcb7. It is a form with 13 question, any of which can be answered by any user. The questions and answers that are submitted are state variables (stored on the blockchain), and behave as non-fungible tokens (see [the ERC721 standard](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md) for more information). The code is published in this [repository](./FormSI060719.sol), and at [etherscan](https://etherscan.io/address/0x6b9d46a223ffa343f8b14d855a8314b0eff7fcb7#code).
 
 The ERC721 portion of the program is based on code by [OpenZeppelin](https://github.com/OpenZeppelin/openzeppelin-solidity/tree/master/contracts/token/ERC721). 
 
@@ -12,7 +12,7 @@ The market portion of the program is based on [CryptoPunks](https://github.com/l
 
 Text snippets in FormSI060719 are taken from Masha Gessen, Nisi Shawl, Margaret Thatcher, Fredric Jameson, Leni Zumas, Philip Roth, Omar El Akkad, Wayne La Pierre, David Graeber, Walt Whitman, George Orwell, Rudyard Kipling, and Donna Haraway.
 
-The program has been extensively tested with the help of [Truffle](https://github.com/trufflesuite/truffle). See the test folder for the testing script used.
+The program has been extensively tested with the help of [Truffle](https://github.com/trufflesuite/truffle). The file [TEST_FormSI060719.js](./TEST_FormSI060719.js) was used for the testing; everything passed successfully.
 
 There are three types of functions in FormSi060719: form functions (for reading and answering form questions), market functions (for bidding on question and answers, or putting them up for sale), and standard ERC721 functions.
 
