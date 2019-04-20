@@ -80,25 +80,25 @@ Remove a "For Sale" declaration. Only the token owner can call this function.
 
 - `marketForSaleInfoByIndex(uint256 tokenId)`
 
-Shows the "For Sale" status of a specific token (identified by the ERC721 index `tokenId`). The structure `marketForSaleInfoByIndex(tokenId)` contains a boolean indicating whether or not the token is for sale (`isForSale`), the ERC721 index of the token (`tokenId`), the current owner and seller of the token (`seller`), the price of the token (`minValue`) in Wei, and the address of the recipient (`onlySellTo`). If the recipient address is the zero address, then anyone can buy the token. Note that this function is a getter that directly accesses the structure, so it does not throw if the token `tokenId` does not exist, unlike the other "For Sale" functions.
+Shows the "For Sale" status of a specific token (identified by the ERC721 index `tokenId`). The structure `marketForSaleInfoByIndex(tokenId)` contains a boolean indicating whether or not the token is for sale (`isForSale`), the ERC721 index of the token (`tokenId`), the current owner and seller of the token (`seller`), the price of the token (`minValue`) in wei, and the address of the designated recipient (`onlySellTo`), if there is one. Note that this function is a getter that directly accesses the structure, so it does not throw if the token `tokenId` does not exist, unlike the other "For Sale" functions.
 
 - `marketBuyForSale(uint256 tokenId)`
 
-Enables a user to buy a token (identified by the ERC721 index `tokenId`) that is up for sale. If `marketForSaleInfoByIndex(tokenId).onlySellto` returns the zero address, then any user can buy the token that is for sale. If `marketForSaleInfoByIndex(tokenId).onlySellto` returns a non-zero address, then only that user can buy the token that is for sale. The purchaser must send an amount of wei at least equal to the sale price  (`marketForSaleInfoByIndex(tokenId).minValue`) with the function call to complete the transaction.
+Enables a user to buy a token (identified by the ERC721 index `tokenId`) that is up for sale. If `marketForSaleInfoByIndex(tokenId).onlySellto` returns the zero address, then any user can buy the token. If `marketForSaleInfoByIndex(tokenId).onlySellto` returns a non-zero address, then only that user can buy the token. The purchaser must send an amount of wei at least equal to the sale price  (`marketForSaleInfoByIndex(tokenId).minValue`) with the function call to complete the transaction.
 
 #### Bid Functions
 
 - `marketDeclareBid(uint256 tokenId)`
 
-Enables a user to declare a bid for a token (identified by the ERC721 index `tokenId`). The user must send the amount of the bid with the function call. If there is already a bid on the token (check `marketBidInfoByIndex(uint256 tokenId)`), the bid must be larger than `marketBidInfoByIndex(tokenId).value`, otherwise `marketDeclareBid(tokenId)` throws. Assuming it is larger, the previous bid is overwritten, and the amount of the previous bid is made available for withdraw through `marketWithdrawWei()`.
+Enables a user to declare a bid for a token (identified by the ERC721 index `tokenId`). The user must send the amount of the bid with the function call. If there is already a bid on the token (check `marketBidInfoByIndex(uint256 tokenId)`), the bid must be larger than `marketBidInfoByIndex(tokenId).value`, otherwise `marketDeclareBid(tokenId)` throws. Assuming it is larger, the previous bid is overwritten, and the amount of the previous bid is made available for withdraw by the previous bidder through `marketWithdrawWei()`.
 
 - `marketWithdrawBid(uint256 tokenId)`
 
-Enables a user to remove a bid on a token (identified by the ERC721 index `tokenId`) already made. Only the bidder `marketBidInfoByIndex(tokenId).bidder` can call this function. The bid is NOT automatically refunded: the user must call `marketWithdrawWei()`.
+Enables a user to remove a bid on a token (identified by the ERC721 index `tokenId`) already made. Only the bidder `marketBidInfoByIndex(tokenId).bidder` can call this function. The bid is not automatically refunded: the user must call `marketWithdrawWei()`.
 
 - `marketAcceptBid(uint256 tokenId, uint256 minPrice)`
 
-Enables a token owner to accept a bid, and transfer the token (identified by the ERC721 index `tokenId`) to the bidder in exchange for the ether bid. Only the token owner can call this function. The parameter `minPrice` must be smaller than or equal to `marketBidInfoByIndex(tokenId).value`. After calling this function, the bid is NOT automatically transferred to the former owner: the former owner must call `marketWithdrawWei()`.
+Enables a token owner to accept a bid, and transfer the token (identified by the ERC721 index `tokenId`) to the bidder in exchange for the ether bid. Only the token owner can call this function. The parameter `minPrice` must be smaller than or equal to `marketBidInfoByIndex(tokenId).value`. After calling this function, the bid is not automatically transferred to the former owner: the former owner must call `marketWithdrawWei()`.
 
 - `marketBidInfoByIndex(uint256 tokenId)`
 
