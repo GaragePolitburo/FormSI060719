@@ -1,6 +1,6 @@
 
 
-// Focus of these tests is on market functions (for selling and bidding on tokens), and the
+// Focus of these tests is the market functions (for selling and bidding on tokens), and the
 // ways in which they interact with ERC721 behavior.
 
 // Uses Open Zeppelin helper functions: https://github.com/OpenZeppelin/openzeppelin-test-helpers
